@@ -10,10 +10,11 @@ class IddsystemGenGenerator < Rails::Generators::Base
 
   def generate_file
     if existing_form(file_name)
-      template "controller/#{file_name}/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
-      template "views/#{view_language}/test.html.#{view_language}", "app/views/layouts/#{file_name}.html.#{view_language}"
+      template "controller/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
+      
+      route "\n#{routes_path}"
     else 
-      run('rails g iddsystem_gen --help')
+      run 'rails g iddsystem_gen --help'
     end 
   end
 
@@ -28,6 +29,10 @@ class IddsystemGenGenerator < Rails::Generators::Base
   # convert string ke bentuk plural, ex: customer => customers
   def file_name_plural
     file_name.pluralize
+  end
+
+  def file_name_camel
+    file_name_plural.camelize
   end
 
   # convert string ke bentuk singular, ex: customers => customer
@@ -54,6 +59,10 @@ class IddsystemGenGenerator < Rails::Generators::Base
     # end.join("\n").strip
   end
 
+  def routes_path
+    read_template(File.join(root_path,'routes',file_name,'routes.rb'))
+  end
+
   # untuk dapatkan nama file action
   def action_file_name(file)
     File.basename(file, ".*")
@@ -70,7 +79,8 @@ class IddsystemGenGenerator < Rails::Generators::Base
   end
 
   def existing_form(file_name)
-    path    = File.join(root_path,"controller",file_name,"controller.rb")
-    FileTest.exist?(path)
+    path    = File.join(root_path,"actions",file_name)
+    # FileTest.exist?(path)
+    Dir.exist?(path)
   end
 end
