@@ -4,7 +4,15 @@ class IddsystemGenGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
   desc "Generate registration file for member and customer on IDdSystems environment.\n"+
         "Please pass at least one form_name as argument on the command.\n"+
-        "currently only available 2 form_name : customer and member."
+        "currently only available 2 form_name : customer and member.\n"+
+        "\n*********************************************************************************\n"+
+        "| Iddsystem plugins is using some static configuration that you must setup first\n"+
+        "| make user you already set this following variables in initializer:\n"+
+        "| 1. PORT_NCO\n"+
+        "| 2. PORT_NCSE\n"+
+        "| 3. TOKEN\n"+
+        "*********************************************************************************\n"
+
   argument :form_name, :type => :string, :default => "default", :banner => "form_name"
   class_option :haml, :banner => "HAML", :type => :boolean, :desc => "Generate HAML for view"
 
