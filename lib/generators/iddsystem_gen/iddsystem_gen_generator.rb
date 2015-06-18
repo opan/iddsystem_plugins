@@ -11,7 +11,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
   def generate_file
     if existing_form(file_name)
       template "controller/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
-      
+
       route "\n#{routes_path}"
     else 
       run 'rails g iddsystem_gen --help'
@@ -31,6 +31,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
     file_name.pluralize
   end
 
+  # convert plural string ke bentuk camelize, ex: customer => Customer
   def file_name_camel
     file_name_plural.camelize
   end
@@ -59,6 +60,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
     # end.join("\n").strip
   end
 
+  # untuk dapatkan relative path directory template routes
   def routes_path
     read_template(File.join(root_path,'routes',file_name,'routes.rb'))
   end
@@ -78,6 +80,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
     File.expand_path('../templates', __FILE__)
   end
 
+  # untuk check apakah template yang diinginkan ada?
   def existing_form(file_name)
     path    = File.join(root_path,"actions",file_name)
     # FileTest.exist?(path)

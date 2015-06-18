@@ -10,8 +10,8 @@ require 'ransack'
 
 module IddsystemPlugins
   class << self
-    def hello_world
-      p "hello_world"
+    def root
+      File.expand_path('../../', __FILE__)
     end
   end
 end
