@@ -1,8 +1,8 @@
 Description:
-    Explain the generator
-
+    Generate registration file for member and customer on IDdSystems environment.
 Example:
-    rails generate iddsystem_gen Thing
-
+    rails generate iddsystem_gen customer|member [options --haml]
+    you must pass customer or member as argument, or at least one.
+    currently availabel form_name is customer and member.
     This will create:
         what/will/it/create
