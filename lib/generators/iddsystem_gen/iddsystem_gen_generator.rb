@@ -7,7 +7,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
         "currently only available 2 form_name : customer and member.\n"+
         "\n*********************************************************************************\n"+
         "| Iddsystem plugins is using some static configuration that you must setup first\n"+
-        "| make user you already set this following variables in initializer:\n"+
+        "| make sure you already set this following variables in initializer:\n"+
         "| 1. PORT_NCO\n"+
         "| 2. PORT_NCSE\n"+
         "| 3. TOKEN\n"+

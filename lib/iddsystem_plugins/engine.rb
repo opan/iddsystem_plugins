@@ -8,5 +8,11 @@ module IddsystemPlugins
       g.orm             :active_record
       g.template_engine :haml
     end
+
+    # Load view helpers for the base application
+    ActiveSupport.on_load(:action_view) do
+      require 'iddsystem_plugins/view_helpers'
+      ActionView::Base.send :include, IddsystemPlugins::ViewHelpers
+    end
   end
 end
