@@ -24,7 +24,7 @@ module IddsystemPlugins
         end
       rescue Exception => e
         response[:msg]      = e.message
-        response[:data]     = ''
+        response[:data]     = e.backtrace
         response[:status]   = 202
       end
 

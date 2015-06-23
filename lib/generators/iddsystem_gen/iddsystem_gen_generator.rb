@@ -19,7 +19,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
   def generate_file
     if existing_form(file_name)
       template "controller/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
-      empty_directory "app/views/#{file_name}"
+      empty_directory "app/views/#{file_name_plural}"
       controller_view
       route "\n#{routes_path}"
     else 
@@ -72,7 +72,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
   # untuk generate list view nya
   def controller_view
     Dir[File.join(root_path,"views",view_language,file_name,"*")].each do |file_path|
-      template file_path, "app/views/#{file_name}/#{action_file_name(file_path)}.html.#{view_language}"
+      template file_path, "app/views/#{file_name_plural}/#{action_file_name(file_path)}.#{view_language}"
     end
   end
 
