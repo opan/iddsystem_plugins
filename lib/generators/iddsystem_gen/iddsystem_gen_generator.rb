@@ -19,7 +19,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
   def generate_file
     if existing_form(file_name)
       template "controller/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
-
+      empty_directory "app/views/#{file_name}"
       controller_view
       route "\n#{routes_path}"
     else 
