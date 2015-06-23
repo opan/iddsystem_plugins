@@ -1,14 +1,16 @@
-= form_for :registration_members, url: registration_members_path, method: :post, html: {id: 'registration_members'} do |f|
-  .form-group
-    = f.label :name1, "Username"
-    = f.text_field :name1, id: 'name1'
-  .form-group
-    = f.label :bp_email, "E-Mail"
-    = f.email_field :bp_email, id: "bp_email" 
-  .form-group
-    = f.label :password, "Password"
-    = f.password_field :password, id: "password"
-  .form-group
-    = f.label :confirm_password, "Password Confirmation"
-    = f.password_field :confirm_password, id: "confirm_password"
-  = f.button :submit
+.row
+  .col-xs-6
+    = form_for :registration_members, url: registration_members_path, method: :post, html: {id: 'registration_members'} do |f|
+      .form-group
+        = f.label :name1, "Username"
+        = f.text_field :name1, id: 'name1', class: "form-control"
+      .form-group
+        = f.label :bp_email, "E-Mail"
+        = f.email_field :bp_email, id: "bp_email", class: "form-control"
+      .form-group
+        = f.label :password, "Password"
+        = f.password_field :password, id: "password", class: "form-control"
+      .form-group
+        = f.label :confirm_password, "Password Confirmation"
+        = f.password_field :confirm_password, id: "confirm_password", class: "form-control"
+      = f.button :submit, class: "btn btn-default"
