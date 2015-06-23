@@ -20,6 +20,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
     if existing_form(file_name)
       template "controller/controller.rb", "app/controllers/#{file_name_plural}_controller.rb"
 
+      controller_view
       route "\n#{routes_path}"
     else 
       run 'rails g iddsystem_gen --help'
@@ -57,7 +58,7 @@ class IddsystemGenGenerator < Rails::Generators::Base
   # untuk baca action/method apa yang ingin di masukkan kedalam template controller.
   def controller_methods(dir_name)
     content = []
-    Dir["#{root_path}/#{dir_name.to_s}/*rb"].each do |file|
+    Dir["#{root_path}/#{dir_name.to_s}/*rb"].sort_by{|file| action_file_name(file)}.each do |file|
       content << read_template("#{root_path}/#{dir_name.to_s}/#{action_file_name(file)}.rb")
     end
     content.join("\n").strip
@@ -66,6 +67,13 @@ class IddsystemGenGenerator < Rails::Generators::Base
     # controller_actions.map do |action|
     #   read_template("#{dir_name}/#{action}.rb")
     # end.join("\n").strip
+  end
+
+  # untuk generate list view nya
+  def controller_view
+    Dir[File.join(root_path,"views",view_language,file_name,"*")].each do |file_path|
+      template file_path, "app/views/#{file_name}/#{action_file_name(file_path)}.html.#{view_language}"
+    end
   end
 
   # untuk dapatkan relative path directory template routes

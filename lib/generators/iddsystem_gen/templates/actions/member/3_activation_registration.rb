@@ -14,3 +14,4 @@
     
     redirect_to({action: 'index'}, notice: 'Your account successfully activated.')
   end
+  
