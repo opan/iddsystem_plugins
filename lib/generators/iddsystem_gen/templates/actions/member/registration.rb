@@ -1,8 +1,10 @@
   def registration
     opts          = {
-      form_values: params[:registration_members],
+      form_values: encode_sensitive_key(params[:registration_members]),
       form_name: 'member',
-      action: 'registration'
+      action: 'registration',
+      project_id: 54, # project id di ncs-e sudah static
+      url_activation: "http://#{HOSTWEB}:#{PORTWEB}/members/a"
     }
 
     req_reg       = IddsystemPlugins::Member.registration(opts)
