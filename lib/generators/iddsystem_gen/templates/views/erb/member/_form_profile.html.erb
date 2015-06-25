@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-xs-6">
+    <%= form_for :profiles, url: activation_members_path, method: :post, html: {id: 'profiles'} do |f| %>
+      <%= fields_for :hidden_field do |ff| %>
+        <%= ff.hidden_field :flag_institusi, id: 'flag_institusi' %>
+        <%= ff.hidden_field :form_values, id: 'form_values', value: @form_values %>
+        <%= ff.hidden_field :q, value: params[:q] %>
+      <% end %>
+      <%= field_set_tag 'Basic Information' do %>
+        <div class="form-group">
+          <%= f.label :bp_email, "Email" %>
+          <%= f.email_field :name2, id: "name2", class: "form-control", disabled: true, value: @bp_email %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name1, "Fullname" %>
+          <%= f.text_field :name1, id: 'name1', class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :name2, "Nickname" %>
+          <%= f.text_field :name1, id: 'name2', class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :is_institusi, 'Institution' %>
+          <%= f.select :is_institusi, options_for_select(@is_institusi,0), {include_blank: true}, class: 'form-control', id: 'is_institusi' %>
+        </div>
+      <% end %>
+      <br/>
+      <%= render 'form_address' %>
+      <br/>
+      <%= render 'form_contact' %>
+      <%= f.button :submit, class: 'btn btn-default' %>
+    <% end %>
+  </div>
+</div>
+<script>
+  
+  $(function(){
+    $('#is_institusi').change(function(e){
+      var cat_institusi = $(this).find('option:selected').attr('class');
+      show_form_address(cat_institusi);
+      show_form_contact(cat_institusi);
+
+      cat_institusi == 'P' ? $('#flag_institusi').val(false): $('#flag_institusi').val(true); 
+    });
+  });
+
+  function show_form_address(cat_institusi){
+    if (cat_institusi == 'P'){
+      $('#form_address2').replaceWith('<div id="div_form_address2"></div>');
+      $('#form_address1').find('legend').text('Address Information');
+    }else{
+      var form_addr1 = $('#form_address1').clone();
+      $('#form_address1').find('legend').text('Company Address');
+      form_addr1.attr('id','form_address2');
+      for(var i=0;i<form_addr1.children().length;i++){
+        var child = form_addr1.children()[i];
+        var tag_name = $(child).prop('tagName');
+
+        if (tag_name.toLowerCase() == 'legend'){
+          $(child).text('NPWP');
+        }else{
+          $(child).find('select,input').attr('name',$(child).find('select,input').attr('name').replace('address1','address2'));
+          $(child).find('label').attr('for',$(child).find('label').attr('for').replace('address1','address2'));
+        }
+      }
+      $('#div_form_address2').replaceWith(form_addr1);
+    }
+  }
+
+  function show_form_contact(cat_institusi){
+    if (cat_institusi == 'P'){
+      $('#form_contact1').find('legend').text('Contact Information');
+      $('#form_contact2').replaceWith("<div id='div_form_contact2'></div>");
+      $('#form_contact3').replaceWith("<div id='div_form_contact3'></div>");
+    }else{
+      $('#form_contact1').find('legend').text('Contact Information 1');
+
+      for(var i=0;i<2;i++){
+        var form_contact1 = $('#form_contact1').clone();
+        form_contact1.attr('id','form_contact'+(i+2));
+        
+        for(var k=0;k<form_contact1.children().length;k++){
+          var child = form_contact1.children()[k];
+          var tag_name = $(child).prop('tagName').toLowerCase();
+
+          if (tag_name == 'legend'){
+            $(child).text('Contact Information '+(i+2));
+          }else{
+            $(child).find('select,input').attr('name',$(child).find('select,input').attr('name').replace('contact1','contact'+(i+2)));
+            $(child).find('label').attr('for',$(child).find('label').attr('for').replace('contact1','contact'+(i+2)));
+          }
+        }
+        $('#div_form_contact'+(i+2)).replaceWith(form_contact1); 
+      }
+    }
+  }
+
+</script>
