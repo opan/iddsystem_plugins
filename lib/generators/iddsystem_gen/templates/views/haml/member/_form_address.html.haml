@@ -1,0 +1,24 @@
+= field_set_tag 'Address Information', id: 'form_address1' do
+  = fields_for :address1 do |ff|
+    .form-group
+      = ff.label :addrs_name, 'Address Name'
+      = ff.text_field :addrs_name, id: 'addrs_name', class: 'form-control'
+    .form-group
+      = ff.label :addrs_line_1, 'Address Detail 1'
+      = ff.text_field :addrs_line_1, id: 'addrs_line_1', class: 'form-control'
+    .form-group
+      = ff.label :addrs_line_2, 'Address Detail 2'
+      = ff.text_field :addrs_line_2, id: 'addrs_line_2', class: 'form-control'
+    .form-group
+      = ff.label :zip, 'Zip'
+      = ff.text_field :zip, id: 'zip', class: 'form-control'
+    .form-group
+      = ff.label :country_id, 'Country'
+      = ff.select :country_id, options_for_select(@country, '0001'), {include_blank: true}, id: 'country_id', class: 'form-control'
+    .form-group
+      = ff.label :state_id, 'State'
+      = ff.select :state_id, options_for_select(@state, '0000000001'), {include_blank: true}, id: 'state_id', class: 'form-control'
+    .form-group
+      = ff.label :city_id, 'City'
+      = ff.select :city_id, options_for_select(@city, '0000000001'), {include_blank: true}, id: 'city_id', class: 'form-control'
+#div_form_address2

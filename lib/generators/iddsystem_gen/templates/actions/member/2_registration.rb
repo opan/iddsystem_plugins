@@ -7,7 +7,7 @@
       url_activation: "http://#{HOSTWEB}:#{PORTWEB}/members/a"
     }
 
-    req_reg       = IddsystemPlugins::Member.registration(opts)
+    req_reg       = IddsystemPlugins::Member.request_data(opts)
 
     if req_reg[:status].eql? 'success'
       redirect_to members_path, notice: "Registration success.\nMessage: #{req_reg[:msg]}"
@@ -16,3 +16,4 @@
     end
     
   end
+  

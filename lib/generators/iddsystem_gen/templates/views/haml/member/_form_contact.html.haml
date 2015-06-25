@@ -1,0 +1,25 @@
+= field_set_tag 'Contact Information', id: 'form_contact1' do
+  = fields_for :contact1 do |ff|
+    .form-group
+      = ff.label :contact_person, 'Contact Person'
+      = ff.text_field :contact_person, class: 'form-control'
+    .form-group
+      = ff.label :salutation, 'Salutation'
+      = ff.select :salutation,options_for_select(@salutation, 0),{include_blank: true}, class: 'form-control'
+    .form-group
+      = ff.label :dept_id, 'Department'
+      = ff.select :dept_id,options_for_select(@dept_id, 30),{include_blank: true}, class: 'form-control'
+    .form-group
+      = ff.label :email, 'Email'
+      = ff.text_field :email, class: 'form-control'
+    .form-group
+      = ff.label :mobile_phone, 'Mobile Phone'
+      = ff.text_field :mobile_phone, class: 'form-control'
+    .form-group
+      = ff.label :direct_phone, 'Direct Phone'
+      = ff.text_field :direct_phone, class: 'form-control'
+    .form-group
+      = ff.label :direct_fax, 'Direct Fax'
+      = ff.text_field :direct_fax, class: 'form-control'
+#div_form_contact2
+#div_form_contact3
