@@ -20,12 +20,12 @@ module IddsystemPlugins
         else
           response[:msg]      = restfull.message
           response[:data]     = ''
-          response[:status]   = restfull.code
+          response[:status]   = 'fails'
         end
       rescue Exception => e
         response[:msg]      = e.message
         response[:data]     = e.backtrace
-        response[:status]   = 202
+        response[:status]   = 'fails'
       end
 
       response
