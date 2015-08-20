@@ -1,10 +1,10 @@
 module IddsystemPlugins
-  class Member
+  class NstCms
     def self.request_data(opts = {})
       response    = {}
 
       begin
-        url       = URI("http://#{IddsystemPlugins.local_ip}:#{opts[:port]}/nco_ws/main")
+        url       = URI("http://#{IddsystemPlugins.local_ip}:#{opts[:port]}#{opts[:url]}")
         req       = Net::HTTP::Post.new(url)
         req.set_form_data(:token => opts[:token], :opts => opts.to_json)
 
